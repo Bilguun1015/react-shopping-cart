@@ -14,16 +14,23 @@ import { CartContext } from './contexts/CartContext'
 function App() {
 	const [products] = useState(data);
 	const [cart, setCart] = useState([]);
-
+	//const [error, setError] = useState(false)
+	
 	const addItem = item => {
-		console.log(item)
-		setCart([...cart, item]);
+		const isInTheCart = cart.includes(item)
+		if(isInTheCart){
+			alert('You already have the item in your cart')
+		} else {
+			setCart([...cart, item]);
+		}
+		
 	};
 
 	const removeItem = id => {
+		console.log(id)
 		setCart(cart.filter(each => each.id !== id))
 	}
-	return (
+	 return (
 		<ProductContext.Provider value={{products, addItem}}>
 			<CartContext.Provider value={{cart, removeItem}}>
 				<div className="App">
